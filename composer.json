@@ -1,0 +1,19 @@
+{
+	"name": "silverstripe/modularpage",
+	"description": "Modular Page allows you to create pages that are made up of reordable content modules instead of a single content area.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "content", "content modules", "content blocks"],
+	"authors": [
+	{
+		"name": "prij",
+		"email": "prij@littlebubble.com"
+	}
+	],
+
+	"require":
+	{
+		"silverstripe/cms": "~3.1",
+		"undefinedoffset/sortablegridfield": "dev-master"
+	},
+	"minimum-stability": "dev"
+}
