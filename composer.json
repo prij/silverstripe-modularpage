@@ -1,5 +1,5 @@
 {
-	"name": "silverstripe/modularpage",
+	"name": "prij/silverstripe-modularpage",
 	"description": "Modular Page allows you to create pages that are made up of reordable content modules instead of a single content area.",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "content", "content modules", "content blocks"],
