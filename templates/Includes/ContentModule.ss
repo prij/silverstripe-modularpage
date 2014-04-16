@@ -1,3 +1,3 @@
-<div class="modular-content $display_class">
-	$ShowContent
+<div class="$DisplayClass">
+	$Content
 </div>
