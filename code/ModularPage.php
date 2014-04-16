@@ -61,8 +61,4 @@ class ModularPage extends Page {
 }
 
 class ModularPage_Controller extends Page_Controller {
-	
-	function init() {
-		parent::init();		
-	}
 }

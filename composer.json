@@ -15,5 +15,7 @@
 		"silverstripe/cms": "~3.1",
 		"undefinedoffset/sortablegridfield": "dev-master"
 	},
-	"minimum-stability": "dev"
+	"extra": {
+		"installer-name": "modularpage"
+	}
 }
