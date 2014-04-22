@@ -40,7 +40,7 @@ class ContentModule extends DataObject
     }
     
     public function Show() {
-        return $this->renderWith($this->ClassName);
+        return $this->renderWith(array($this->ClassName, 'ContentModule'));
     }
     
     public function DisplayClass() {
@@ -64,10 +64,17 @@ class ContentModule extends DataObject
     
     public function onBeforeWrite() {
         parent::onBeforeWrite();
+        $this->ClassName = $this->ModuleType;
         if (!$this->Title) {
             $this->Title = "Untitled";
         }
     }
+    
+    /**
+     * Override this method to display custom fields for any content module extensions 
+     * @param  FieldList $fieldList
+     * @return FieldList
+     */
     
     public function getAdminFields($fieldList) {
         $fieldList->addFieldToTab('Root.Main', new HTMLEditorField('Content'));
@@ -86,6 +93,7 @@ class ContentModule extends DataObject
         if ($this->ModuleType) {
             $fields->addFieldToTab('Root.Main', new CheckboxField('Published'));
             $instance = singleton($this->ModuleType);
+            $instance->ID = $this->ID;
             $instance->getAdminFields($fields);
         }
         

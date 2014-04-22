@@ -28,13 +28,11 @@ class ModularPage extends Page
         $fields = parent::getCMSFields();
         
         $fields->removeByName('Content');
-        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content')->performReadonlyTransformation() , 'Metadata');
-        
-        $conf = GridFieldConfig_RelationEditor::create();
+        //$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content')->performReadonlyTransformation() , 'Metadata');
+
+        $conf = GridFieldConfig_RecordEditor::create();
         $conf->addComponent(new GridFieldSortableRows('SortOrder'));
-        
-        $fields->addFieldToTab('Root.ContentModules', new GridField('ContentModules', 'ContentModule', $this->ContentModules() , $conf));
-        
+        $fields->addFieldToTab('Root.Main', new GridField('ContentModules', 'Content', $this->ContentModules()->sort('SortOrder'), $conf), 'Metadata');
         return $fields;
     }
     
