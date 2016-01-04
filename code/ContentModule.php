@@ -34,35 +34,44 @@ class ContentModule extends DataObject
         'showPublished' => 'Published',
     );
     
-    public function showPublished() {
-        if ($this->Published) return "Yes";
-        else return "No";
+    public function showPublished()
+    {
+        if ($this->Published) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
     
-    public function Show() {
+    public function Show()
+    {
         return $this->renderWith(array($this->ClassName, 'ContentModule'));
     }
     
-    public function DisplayClass() {
+    public function DisplayClass()
+    {
         return 'modular-content ' . strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1-', $this->ClassName));
     }
     
-    public function getDescription() {
+    public function getDescription()
+    {
         return self::$description;
     }
     
-    private function getModuleTypes() {
+    private function getModuleTypes()
+    {
         $moduleTypes = array();
         $classes = ClassInfo::getValidSubClasses('ContentModule');
         foreach ($classes as $type) {
             $instance = singleton($type);
-            $html = sprintf('<span class="page-icon class-%s"></span><strong class="title">%s</strong><span class="description">%s</span>', $instance->ClassName, $instance->stat('singular_name') , $instance->stat('description'));
+            $html = sprintf('<span class="page-icon class-%s"></span><strong class="title">%s</strong><span class="description">%s</span>', $instance->ClassName, $instance->stat('singular_name'), $instance->stat('description'));
             $moduleTypes[$instance->ClassName] = $html;
         }
         return $moduleTypes;
     }
     
-    public function onBeforeWrite() {
+    public function onBeforeWrite()
+    {
         parent::onBeforeWrite();
         $this->ClassName = $this->ModuleType;
         if (!$this->Title) {
@@ -76,16 +85,18 @@ class ContentModule extends DataObject
      * @return FieldList
      */
     
-    public function getAdminFields($fieldList) {
+    public function getAdminFields($fieldList)
+    {
         $fieldList->addFieldToTab('Root.Main', new HTMLEditorField('Content'));
         return $fieldList;
     }
     
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = new FieldList();
         $fields->push(new TabSet("Root", $mainTab = new Tab("Main")));
         
-        $typeField = new OptionsetField("ModuleType", "Module type", $this->getModuleTypes() , $this->ClassName);
+        $typeField = new OptionsetField("ModuleType", "Module type", $this->getModuleTypes(), $this->ClassName);
         
         $fields->addFieldToTab('Root.Main', new TextField('Title'));
         $fields->addFieldToTab('Root.Main', $typeField);

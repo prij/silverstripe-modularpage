@@ -24,7 +24,8 @@ class ModularPage extends Page
         'ContentModules' => 'ContentModule',
     );
     
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         
         $fields->removeByName('Content');
@@ -36,14 +37,16 @@ class ModularPage extends Page
         return $fields;
     }
     
-    public function PublishedContentModules() {
+    public function PublishedContentModules()
+    {
         return ContentModule::get()->filter(array(
             'ModularPageID' => $this->ID,
             'Published' => 1
         ))->sort('SortOrder');
     }
     
-    private function generateContent() {
+    private function generateContent()
+    {
         $this->Content = '';
         $contentModules = $this->PublishedContentModules();
         foreach ($contentModules as $module) {
@@ -52,7 +55,8 @@ class ModularPage extends Page
         return $this->Content;
     }
     
-    public function onBeforeWrite() {
+    public function onBeforeWrite()
+    {
         $this->generateContent();
         parent::onBeforeWrite();
     }
